@@ -1,3 +1,4 @@
+
 package practice;
 
 import java.io.IOException;
@@ -48,47 +49,14 @@ public class BankTransaction {
 		if(o == null || getClass() != o.getClass()) return false;
 		BankTransaction that = (BankTransaction) o;
 		
-		return Double.compare(that.amount, amount) == 0 && date.equals(that.date) && description.equals(that.description);
+		return Double.compare(that.amount,
+				   amount) == 0 && date.equals(that.date) && description.equals(that.description);
 	}
 	
 	
 	@Override
 	public int hashCode() {
 		return Objects.hash(date, amount, description);
-	}
-	
-	
-	public static double calculateTotalAmount(final List<BankTransaction> bankTransactions) {
-		double total = 0;
-		for(final BankTransaction bankTransaction : bankTransactions) {
-			total += bankTransaction.getAmount();
-		}
-		return total;
-	}
-	
-	
-	public static List<BankTransaction> selectInMonth(final List<BankTransaction> bankTransactions, final Month month) {
-		final List<BankTransaction> bankTransactionsInMonth = new ArrayList<>();
-		for(final BankTransaction bankTransaction: bankTransactions) {
-			if(bankTransaction.getDate().getMonth() == month) {
-				bankTransactionsInMonth.add(bankTransaction);
-			}
-		}
-		return bankTransactionsInMonth;
-	}
-	
-	
-	public static void main(String[] args) throws IOException {
-		final BankStatementCSVParser bankStatementParser = new BankStatementCSVParser();
-		
-		final Path path = Paths.get(RESOURCES);
-		final List<String> lines = Files.readAllLines(path);
-		
-		final List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFromCSV(lines);
-		
-		
-		System.out.println("The total for all transactions is " + calculateTotalAmount(bankTransactions));
-		System.out.println("Transactions in January " + selectInMonth(bankTransactions, Month.JANUARY));
 	}
 }
 
