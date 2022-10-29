@@ -15,6 +15,7 @@ public class BankStatementCSVParserTest {
 //	public void shouldParseOneCorrectLine() throws Exception {
 //		Assert.fail("Not yet implemented");
 //	
+
 	@Test
 	public void shouldParseOneCorrectLine() throws Exception {
 		final String line = "30-01-2017,-50,Tesco";

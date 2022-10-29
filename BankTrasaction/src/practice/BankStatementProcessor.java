@@ -41,5 +41,27 @@ public class BankStatementProcessor {
 		}
 		return total;
 	}
+	
+	
+	public BankTransaction calculateMaxInMonth() {
+		BankTransaction result = bankTransactions.get(0);
+		for(final BankTransaction bankTransaction: bankTransactions) {
+			if(Math.abs(bankTransaction.getAmount()) > Math.abs(result.getAmount())) {
+				result = bankTransaction;
+			}
+		}
+		return result;
+	}
+	
+	
+	public BankTransaction calculateMinInMonth() {
+		BankTransaction result = bankTransactions.get(0);
+		for(final BankTransaction bankTransaction: bankTransactions) {
+			if(Math.abs(bankTransaction.getAmount()) < Math.abs(result.getAmount())) {
+				result = bankTransaction;
+			}
+		}
+		return result;
+	}
 }
 
