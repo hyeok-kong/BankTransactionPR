@@ -7,9 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 
 public class BankTransaction {
 	private static final String RESOURCES = "C:\\Users\\khb69\\Desktop\\Project\\datas\\RESOURCES.txt";
@@ -57,6 +56,36 @@ public class BankTransaction {
 	@Override
 	public int hashCode() {
 		return Objects.hash(date, amount, description);
+	}
+	
+	
+	public Notification validate() {
+		
+		final Notification notification = new Notification();
+		if(this.description.length() > 100) {
+			notification.addError("The description is too long");
+		}
+		
+		final LocalDate parsedDate;
+		try {
+			parsedDate = this.date;
+			if(parsedDate.isAfter(LocalDate.now())) {
+				notification.addError("date cannot be in the future");
+			}
+		}
+		catch(DateTimeParseException e) {
+			notification.addError("Invalid format for date");
+		}
+		
+		final double amount;
+		try {
+			amount = this.amount;
+		}
+		catch(NumberFormatException e) {
+			notification.addError("Invalid format for amount");
+		}
+		
+		return notification;
 	}
 }
 

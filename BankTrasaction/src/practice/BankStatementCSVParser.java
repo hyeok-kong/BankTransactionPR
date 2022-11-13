@@ -2,6 +2,7 @@ package practice;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,4 +28,6 @@ public class BankStatementCSVParser implements BankStatementParser {
 		}
 		return bankTransactions;
 	}
+	
+	
 }
